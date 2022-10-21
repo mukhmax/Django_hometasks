@@ -17,3 +17,6 @@ settings_local.py
 
 ### OS specific ###
 .DS_Store
+
+1.1-first-project/first_project/venv
+1.1-first-project/first_project/.idea
