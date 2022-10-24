@@ -20,3 +20,7 @@ settings_local.py
 
 1.1-first-project/first_project/venv
 1.1-first-project/first_project/.idea
+1.2-requests-templates/recipes/venv
+1.2-requests-templates/recipes/.idea
+1.2-requests-templates/pagination/venv
+1.2-requests-templates/pagination/.idea

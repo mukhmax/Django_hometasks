@@ -1,6 +1,5 @@
-{% load static %}
-
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <!-- Basic Page Needs -->
@@ -16,8 +15,8 @@
     <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="{% static "css/normalize.css" %}">
-    <link rel="stylesheet" href="{% static "css/skeleton.css" %}">
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'css/skeleton.css' %}">
 </head>
 <body>
 <div class="container">
@@ -31,11 +30,11 @@
             </tr>
             </thead>
             <tbody>
-            {% for station in bus_stations %}
+            {% for station in page %}
                 <tr>
-                    <td>{{ station.Name }}</td>
-                    <td>{{ station.Street }}</td>
-                    <td>{{ station.District }}</td>
+                    <td style="font-size: 22px">{{ station.Name }}</td>
+                    <td style="font-size: 22px">{{ station.Street }}</td>
+                    <td style="font-size: 22px">{{ station.District }}</td>
                 </tr>
             {% endfor %}
             </tbody>
