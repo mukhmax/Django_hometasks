@@ -42,9 +42,17 @@
 
         {% if page.has_previous %}
             <a class="button button-primary" href="?page={{ page.previous_page_number }}">⟵</a>
+            {% if prev_page.has_previous %}
+                <a class="button button-primary" href="?page={{ prev_page.previous_page_number }}">{{ prev_page.previous_page_number }}</a>
+            {% endif %}
+            <a class="button button-primary" href="?page={{ page.previous_page_number }}">{{ page.previous_page_number }}</a>
         {% endif %}
         <a class="button disabled" href="">{{ page.number }}</a>
         {% if page.has_next %}
+            <a class="button button-primary" href="?page={{ page.next_page_number }}">{{ page.next_page_number }}</a>
+            {% if next_page.has_next %}
+                <a class="button button-primary" href="?page={{ next_page.next_page_number }}">{{ next_page.next_page_number }}</a>
+            {% endif %}
             <a class="button button-primary" href="?page={{ page.next_page_number }}">⟶</a>
         {% endif %}
     </div>
