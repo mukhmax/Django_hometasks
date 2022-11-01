@@ -3,18 +3,36 @@
     "model": "books.book",
     "pk": 1,
     "fields": {
-      "name": "Война и мир",
+      "name": "Преступление и наказание",
       "author": "Ф.Д. Достоевский",
-      "pub_date": "2018-02-27"
+      "pub_date": "2019-02-20"
     }
   },
   {
     "model": "books.book",
     "pk": 2,
     "fields": {
-      "name": "1984",
-      "author": "Джордж Оруэл",
-      "pub_date": "2016-12-06"
+      "name": "О дивный новый мир",
+      "author": "Олдос Хаксли",
+      "pub_date": "2015-06-06"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 1,
+    "fields": {
+      "name": "Обитаемый остров",
+      "author": "А. и Б. Стругацкие",
+      "pub_date": "2016-11-27"
+    }
+  },
+  {
+    "model": "books.book",
+    "pk": 2,
+    "fields": {
+      "name": "Снежная королева",
+      "author": "Г. Х. Андерсен",
+      "pub_date": "2021-12-20"
     }
   }
 ]
