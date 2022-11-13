@@ -3,7 +3,7 @@ from datetime import date
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 
-from books.models import Book
+from models_list_displaying.books.models import Book
 
 
 def index(request):
