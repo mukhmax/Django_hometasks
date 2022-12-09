@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
-from rest_framework import serializers
+from rest_framework import serializers, request
+from rest_framework.exceptions import ValidationError
 
 from advertisements.models import Advertisement
 
@@ -9,8 +10,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'first_name',
-                  'last_name',)
+        fields = ('id', 'username', 'first_name', 'last_name',)
 
 
 class AdvertisementSerializer(serializers.ModelSerializer):
@@ -22,8 +22,8 @@ class AdvertisementSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Advertisement
-        fields = ('id', 'title', 'description', 'creator',
-                  'status', 'created_at', )
+        fields = ('id', 'title', 'description', 'creator', 'status', 'created_at',)
+        read_only_fields = ('creator',)
 
     def create(self, validated_data):
         """Метод для создания"""
@@ -39,7 +39,13 @@ class AdvertisementSerializer(serializers.ModelSerializer):
 
     def validate(self, data):
         """Метод для валидации. Вызывается при создании и обновлении."""
-
         # TODO: добавьте требуемую валидацию
-
+        method = self.context['request'].method
+        status = self.initial_data.get('status')
+        opened = Advertisement.objects.filter(status='OPEN')
+        user_opened = opened.filter(creator=self.context["request"].user)
+        if method == "POST" and len(user_opened) >= 10 and not status or status == 'OPEN':
+            raise ValidationError('Вы превысили максимальное количество активных объявлений.')
+        if method in ["PUT", "PATCH"] and len(user_opened) >= 10 and status == 'OPEN':
+            raise ValidationError('Вы превысили максимальное количество активных объявлений.')
         return data

@@ -1,0 +1,39 @@
+POST http://127.0.0.1:8000/api/create_sensor/
+Content-Type: application/json
+
+{
+    "name": "A1", 
+    "description": "Hall5"
+    }
+
+###
+
+PUT http://127.0.0.1:8000/api/modify/3/
+Content-Type: application/json
+
+{
+    "name": "A7", 
+    "description": "bathroom_"
+    }
+
+###
+
+GET http://127.0.0.1:8000/api/sensors-list/
+
+###
+
+POST http://127.0.0.1:8000/api/add-measurement/
+Content-Type: application/json
+
+{
+    "sensor": 6, 
+    "temperature": 21.2,
+    "picture": "pictures/stock-photo-digital-medical-thermometer-showing-healthy.jpeg"
+    }
+
+###
+
+GET http://127.0.0.1:8000/api/sensor-data/6/
+
+###
+
