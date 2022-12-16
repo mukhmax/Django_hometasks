@@ -12,7 +12,7 @@ Authorization: Token 42a8f3132e0c796b71fbb42c5f36a29ca3e255ed
 # создание объявления
 POST {{baseUrl}}/advertisement/
 Content-Type: application/json
-Authorization: Token 42a8f3132e0c796b71fbb42c5f36a29ca3e255ed
+Authorization: Token dbea12c100ff8d88a5c8e09974601268a38fa11d
 
 {
   "title": "Как дела?",
@@ -41,10 +41,11 @@ Content-Type: application/json
 ###
 
 # фильтрация по дате
-GET {{baseUrl}}/advertisement/?created_at_after=&created_at_before=2022-11-21
+GET {{baseUrl}}/advertisement/?created_at_after=2022-11-21&created_at_before=
+Authorization: Token dbea12c100ff8d88a5c8e09974601268a38fa11d
 
 ###
 
-DELETE {{baseUrl}}/advertisement/6/
+DELETE {{baseUrl}}/advertisement/39/
 Authorization: Token 42a8f3132e0c796b71fbb42c5f36a29ca3e255ed
 

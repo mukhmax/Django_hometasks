@@ -1,8 +1,9 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers, request
 from rest_framework.exceptions import ValidationError
+from rest_framework.validators import UniqueTogetherValidator
 
-from advertisements.models import Advertisement
+from advertisements.models import Advertisement, Favorite
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -48,4 +49,28 @@ class AdvertisementSerializer(serializers.ModelSerializer):
             raise ValidationError('Вы превысили максимальное количество активных объявлений.')
         if method in ["PUT", "PATCH"] and len(user_opened) >= 10 and status == 'OPEN':
             raise ValidationError('Вы превысили максимальное количество активных объявлений.')
+        return data
+
+
+class FavoriteSerializer(serializers.ModelSerializer):
+    """Serializer для избранного."""
+
+    class Meta:
+        model = Favorite
+        fields = ('advertisement', 'user',)
+        read_only_fields = ('user',)
+
+    def validate(self, data):
+        """Метод для валидации. Вызывается при создании и обновлении."""
+        method = self.context['request'].method
+        username = self.context['request'].user
+        user = User.objects.get(username=username).id
+        advertisement_id = self.initial_data.get('advertisement')
+        creator_name = Advertisement.objects.get(id=advertisement_id).creator
+        creator = User.objects.get(username=creator_name).id
+        if method in ["POST", "PUT", "PATCH"] and user == creator:
+            raise ValidationError('Создатель объявления не может добавлять его в избранное.')
+        user = Favorite.objects.get(advertisement=advertisement_id, user=user)
+        if method in ["POST", "PUT", "PATCH"] and user:
+            raise ValidationError('Объявление уже добавлено пользователем в избранные.')
         return data
