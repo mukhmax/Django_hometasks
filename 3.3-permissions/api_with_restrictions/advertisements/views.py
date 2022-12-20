@@ -2,19 +2,11 @@ from django.db.migrations import serializer
 from django_filters import rest_framework as filters
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.viewsets import ModelViewSet
+from advertisements.filters import AdvertisementFilter
 from advertisements.models import Advertisement, Favorite
 from advertisements.permissions import IsOwnerOrIsAdminOrReadOnly, IsNotOwner, IsOwnerOrReadOnly
 from advertisements.serializers import AdvertisementSerializer, FavoriteSerializer
 
-
-class AdvertisementFilter(filters.FilterSet):
-    created_at = filters.DateFromToRangeFilter()
-    status = filters.DjangoFilterBackend
-    creator = filters.DjangoFilterBackend
-
-    class Meta:
-        model = Advertisement
-        fields = ['created_at', 'status', 'creator']
 
 
 class AdvertisementViewSet(ModelViewSet):

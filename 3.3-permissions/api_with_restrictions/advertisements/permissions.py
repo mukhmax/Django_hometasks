@@ -8,7 +8,7 @@ class IsOwnerOrIsAdminOrReadOnly(BasePermission):
 
 class IsNotOwner(BasePermission):
     def has_object_permission(self, request, view, obj):
-        return request.user != obj.creator
+        return request.user != obj.user
 
 
 class IsOwnerOrReadOnly(BasePermission):
